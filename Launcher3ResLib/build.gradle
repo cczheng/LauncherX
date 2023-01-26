@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 29
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    //https://developer.aliyun.com/mvn/search
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.3.0'
+//    api files('libs\\iconloader_base.jar')
+    api project(path: ':Launcher3IconLoaderLib')
+    api files('libs\\LauncherPluginLib.jar')
+    api files('libs\\PluginCoreLib.jar')
+    api files('libs\\launcher_log_protos_lite.jar')
+    api files('libs\\libprotobuf-java-lite.jar')
+    api 'androidx.constraintlayout:constraintlayout:2.1.0'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    api 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03'
+    api 'androidx.fragment:fragment:1.4.1'
+    api 'androidx.preference:preference:1.2.0-alpha01'
+//    api 'androidx.slice:slice-view:1.1.0-alpha02'
+    api 'androidx.slice:slice-core:1.1.0-alpha02'
+    api 'androidx.slice:slice-builders:1.1.0-alpha02'
+    api 'androidx.cardview:cardview:1.0.0-rc02'
+
+}

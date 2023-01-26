@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LauncherX"
 include ':app'
+include ':Launcher3QuickStepLib'
+include ':Launcher3ResLib'
+include ':Launcher3IconLoaderLib'

@@ -1,21 +1,29 @@
+
 plugins {
     id 'com.android.application'
 }
 
+
+
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.android.launcher3"
         minSdk 29
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        targetSdk 31
+        versionCode 32
+        versionName "12.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
+        debug {//测试下的配置
+            minifyEnabled false
+            shrinkResources false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -29,9 +37,30 @@ android {
 
 dependencies {
 
+    compileOnly files('libs\\framework.jar')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
+    implementation project(path: ':Launcher3QuickStepLib')
+//    testImplementation 'junit:junit:4.+'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
+
+/*
+gradle-7.0.2-bin.zip 版本太高，用不了。需要降低版本
+preBuild {
+    doLast {
+        def imlFile = file(project.name + ".iml")
+        println 'Change ' + project.name + '.iml order'
+        try {
+            def parsedXml = (new XmlParser()).parse(imlFile)
+            def jdkNode = parsedXml.component[1].orderEntry.find { it.'@type' == 'jdk' }
+            parsedXml.component[1].remove(jdkNode)
+            def sdkString = "Android API " + android.compileSdkVersion.substring("android-".length()) + " Platform"
+            new Node(parsedXml.component[1], 'orderEntry', ['type': 'jdk', 'jdkName': sdkString, 'jdkType': 'Android SDK'])
+            groovy.xml.XmlUtil.serialize(parsedXml, new FileOutputStream(imlFile))
+        } catch (FileNotFoundException e) {
+
+        }
+    }
+}*/
